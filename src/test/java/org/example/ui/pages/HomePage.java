@@ -25,6 +25,9 @@ public class HomePage extends BasePage {
     @FindBy(css = "a[href='https://inone.useinsider.com/login']")
     private WebElement loginBtn;
 
+    @FindBy(id = "wt-cli-accept-all-btn")
+    private WebElement acceptCookies;
+
     public HomePage() {
         super();
         logger.info("Initializing HomePage");
@@ -44,6 +47,12 @@ public class HomePage extends BasePage {
         boolean isCorrectUrl = driver.getCurrentUrl().equals(HOME_URL);
         
         return isLogoDisplayed && isLoginBtnDisplayed && isCorrectUrl;
+    }
+
+    @Step("Accepting Cookies")
+    public void acceptCookies() {
+        logger.info("Accepting cookies");
+        click(acceptCookies);
     }
 
     @Step("Navigating to Careers page")

@@ -26,6 +26,7 @@ public class InsiderUITest extends BaseTest {
         logger.info("Step 1: Navigate to home page");
         HomePage homePage = new HomePage();
         homePage.navigateToHomePage();
+        homePage.acceptCookies();
         assertTrue(homePage.validateBasicElements(), "Home page not loaded correctly");
 
         logger.info("Step 2: Navigate to careers page");
