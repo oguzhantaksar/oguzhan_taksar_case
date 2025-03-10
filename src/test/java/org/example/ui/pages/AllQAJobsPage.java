@@ -48,6 +48,17 @@ public class AllQAJobsPage extends BasePage {
     // Waits for QA jobs to load
     private void waitForQAJobsToLoad() {
         logger.info("Waiting for QA jobs to load");
+        // Scroll to the job listings area to ensure it's visible
+        try {
+            List<WebElement> listings = driver.findElements(jobListings);
+            if (!listings.isEmpty()) {
+                scrollToElement(listings.get(0));
+                logger.info("Scrolled to job listings area");
+            }
+        } catch (Exception e) {
+            logger.warn("Could not scroll to job listings area: {}", e.getMessage());
+        }
+        
         wait.until(driver -> {
             List<WebElement> jobs = driver.findElements(jobListings);
             return jobs.stream().anyMatch(job -> {
@@ -67,6 +78,13 @@ public class AllQAJobsPage extends BasePage {
     public Boolean verifyJobExist() {
         logger.info("Verifying QA jobs exist");
         try {
+            // Scroll to job listings before verification
+            List<WebElement> listings = driver.findElements(jobListings);
+            if (!listings.isEmpty()) {
+                scrollToElement(listings.get(0));
+                logger.info("Scrolled to job listings");
+            }
+            
             waitForQAJobsToLoad();
             List<WebElement> allJobs = driver.findElements(jobListings);
             logger.info("Found {} QA jobs", allJobs.size());
@@ -81,6 +99,13 @@ public class AllQAJobsPage extends BasePage {
     @Step("Verifying all job details match filter criteria")
     public Boolean verifyAllJobsDetails() {
         logger.info("Verifying job details");
+        // Scroll to job listings before verification
+        List<WebElement> listings = driver.findElements(jobListings);
+        if (!listings.isEmpty()) {
+            scrollToElement(listings.get(0));
+            logger.info("Scrolled to job listings");
+        }
+        
         waitForQAJobsToLoad();
         List<WebElement> allJobs = driver.findElements(jobListings);
 
