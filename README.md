@@ -8,7 +8,10 @@
 
 ## Running the Tests
 
-The tests are configured to run in parallel classes.
+- The tests are configured to run in parallel classes.
+- Also they can indivually seen:
+- **API Tests:** `src/test/java/org/example/api/tests/PetApiTest`
+- **UI Test:** `src/test/java/org/example/ui/tests/InsiderUITest`
 
 ### Running all tests:
 
@@ -45,7 +48,7 @@ allure serve -p 8080 target/allure-results
 
 ## Configuration
 
-You can modify test configuration in `src/test/resources/config.properties`:
+ Test configuration can be changed in `src/test/resources/config.properties`:
 
 - Change browser: Set `browser=firefox` or `browser=chrome`
 - Change timeouts: Modify `implicitWait` and `explicitWait` values
@@ -59,7 +62,7 @@ Logs are stored in `target/test-automation.log` and also displayed in the consol
 
 Retry mechanism in API test is used because of API responses being not consistent, for specific requests sometimes it is responding with 200, sometimes it is 404. Since there are no clear requiriments, assertions made with assumptions.
 
-Test data created before every test for isolated testing.
+Test data created before and cleaned after for necesssary tests.
 
 For demonstration purposes some logs can be unnecessary, they can be removed it desired.
 
